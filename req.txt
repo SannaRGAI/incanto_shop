@@ -1,0 +1,14 @@
+django
+djangorestframework
+djangorestframework-simplejwt
+django-filter
+drf-api-logger
+drf-yasg
+Pillow
+psycopg2-binary
+python-decouple
+celery
+redis
+gunicorn
+django-cors-headers
+drf-writable-nested
