@@ -7,6 +7,9 @@ User = get_user_model()
 class Category(models.Model):
     title = models.CharField(max_length=100)
 
+    def __str__(self) -> str:
+        return self.title
+
 
 class Product(models.Model):
     category = models.ForeignKey(
@@ -20,6 +23,7 @@ class Product(models.Model):
     color = models.CharField(max_length=55)
     size = models.CharField(max_length=55)
     quantity = models.IntegerField()
+    image = models.ImageField(upload_to='products')
     
     @property
     def average_rating(self):
@@ -27,6 +31,9 @@ class Product(models.Model):
         if ratings.exists():
             return sum(x.value for x in ratings) // ratings.count()
         return 0
+    
+    def __str__(self) -> str:
+        return self.title
     
 
 class Order(models.Model):
@@ -74,6 +81,9 @@ class Comment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self) -> str:
+        return f'{self.user} -> {self.product}'
+
 
 class Rating(models.Model):
     user = models.ForeignKey(
@@ -90,6 +100,8 @@ class Rating(models.Model):
         choices=[(1, 1), (2, 2), (3, 3), (4, 4), (5, 5)]
     )
 
+    def __str__(self) -> str:
+        return f'{self.user} -> {self.product}'
 
 class Favorite(models.Model):
     user = models.ForeignKey(
@@ -102,3 +114,6 @@ class Favorite(models.Model):
         on_delete=models.CASCADE,
         related_name='favorites'
     )
+
+    def __str__(self) -> str:
+        return f'{self.user} -> {self.product}'
