@@ -24,6 +24,7 @@ class Product(models.Model):
     size = models.CharField(max_length=55)
     quantity = models.IntegerField()
     image = models.ImageField(upload_to='products', default='', blank=True)
+    image_url = models.CharField(max_length=5000, default='', blank=True)
     
     @property
     def average_rating(self):
