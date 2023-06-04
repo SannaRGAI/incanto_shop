@@ -81,8 +81,6 @@ class FavoriteSerializer(ModelSerializer):
         return attrs
 
     def to_representation(self, instance: Favorite):
-        from main.serializers import ProductSerializer
-
         rep = super().to_representation(instance)
         rep["product"] = ProductSerializer(instance.product).data
         return rep
